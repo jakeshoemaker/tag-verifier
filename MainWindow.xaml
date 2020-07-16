@@ -51,9 +51,6 @@
         </Canvas>
         
         <!-- tag success animation -->
-
-
-
         <Canvas Margin="535,115,-678,48" Grid.Column="1" Background="#FFDD4C4C"></Canvas>
         <Canvas Grid.Column="1" Margin="547,134,-664,60" >
             <Canvas.Background>

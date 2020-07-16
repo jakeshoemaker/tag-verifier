@@ -3,20 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Media.Animation;
-using System.Threading;
 
 namespace verifyTagsGUI
 {
@@ -34,8 +24,8 @@ namespace verifyTagsGUI
         // creating a list for the tags that need to be validated
         static List<string> tagList = new List<string>();
 
-        string notVerified = "C:/users/jshoemaker/source/repos/testingData/prever.csv";
-        string verified = "C:/users/jshoemaker/source/repos/testingData/postVerification.csv";
+        string notVerified = "";
+        string verified = "";
 
         public MainWindow()
         {

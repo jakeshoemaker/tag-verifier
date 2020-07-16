@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon></ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="checkmark.jpg" />
+    <None Remove="x-mark.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OctaneSDK" Version="3.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="checkmark.jpg" />
+    <Resource Include="x-mark.png" />
+  </ItemGroup>
+
+</Project>
