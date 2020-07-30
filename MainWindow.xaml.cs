@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
+using System.Threading;
 
 namespace verifyTagsGUI
 {
@@ -32,11 +33,12 @@ namespace verifyTagsGUI
             InitializeComponent();
 
             // read the input file and add them to the tag list
-            string[] lines = File.ReadAllLines(notVerified);
+            /*string[] lines = File.ReadAllLines(notVerified);
             foreach (string line in lines)
             {
                 tagList.Add(line);
             }
+            */
         }
 
         public void Connect(string hostname)
@@ -59,6 +61,7 @@ namespace verifyTagsGUI
 
                 reader.ApplySettings(settings);
                 Console.WriteLine("Successfully connected");
+                listTags.Items.Clear();
                 listTags.Items.Add("Successfuly connected to the reader");
 
                 reader.TagsReported += onTagsReported;
@@ -67,12 +70,14 @@ namespace verifyTagsGUI
             {
                 System.Diagnostics.Trace.
                     WriteLine("An Octane SDK exception has occurred : {0}", er.Message);
+                listTags.Items.Clear();
                 listTags.Items.Add("An Octane SDK Exception has occured: " + er.Message);
             }
             catch (Exception er)
             {
                 System.Diagnostics.Trace.
                     WriteLine("An exception has occurred : {0}", er.Message);
+                listTags.Items.Clear();
                 listTags.Items.Add("An exception has occurred: " + er.Message);
             }
         }
@@ -91,7 +96,7 @@ namespace verifyTagsGUI
                 foreach (Tag tag in distinctTags)
                 {
                     key = tag.Epc.ToString();
-                    VerifyTag(key);
+                    VerifyTag(key, reader);
                 }
             };
 
@@ -99,7 +104,7 @@ namespace verifyTagsGUI
 
         }
 
-        public void VerifyTag(string key)
+        public void VerifyTag(string key, ImpinjReader reader)
         {
             if (tagList.Contains(key))
             {
@@ -115,10 +120,12 @@ namespace verifyTagsGUI
                     tagList.Remove(key);
                     tagsVerified.Add(key);
                     UpdateListbox(key, 0);  // 0 == tag verified
-
+                    reader.SetGpo(1, true);
                     // success animation
                     Storyboard sb = FindResource("PlaySuccessAnimation") as Storyboard;
                     sb.Begin();
+                    Thread.Sleep(1000);
+                    reader.SetGpo(1, false);
                 }
             }
             // checking for tag duplicates (not in tagList but already in verified list)
@@ -240,11 +247,17 @@ namespace verifyTagsGUI
             // setting the chosen file to the pre-verification file
             if (result == true)
             {
-                open_file_dialog.FileName = notVerified;
+                notVerified = open_file_dialog.FileName;
+                // read the input file and add them to the tag list
+                string[] lines = File.ReadAllLines(notVerified);
+                foreach (string line in lines)
+                {
+                    tagList.Add(line);
+                }
             }
             else
             {
-                listTags.Items.Add("No file was selected. Using default file.");
+                listTags.Items.Add("No file was selected. Please specify a file");
             }
             
         }
@@ -260,7 +273,7 @@ namespace verifyTagsGUI
 
             if (result == true)
             {
-                openOutFile.FileName = verified;
+                verified = openOutFile.FileName;
             }
             else
             {

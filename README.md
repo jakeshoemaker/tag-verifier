@@ -1,5 +1,6 @@
 # tag-verifier
-A Desktop Application that Verifies RFID tag EPC's when they become shipped in a role.
+A Desktop Application that Verifies RFID tag EPC's when they become shipped in a roll.
+  ![](readme-images/success.PNG)
  
 ## Usage
 - To Use this you will need 

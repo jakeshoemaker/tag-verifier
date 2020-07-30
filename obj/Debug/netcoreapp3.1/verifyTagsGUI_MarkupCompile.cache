@@ -1,20 +1,20 @@
 ﻿verifyTagsGUI
-
+1.0.0.0
 
 winexe
 C#
 .cs
-C:\Users\jshoemaker\source\repos\verifyTagsGUI\obj\Debug\netcoreapp3.1\
+c:\Users\jshoemaker\source\repos\verifyTagsGUI\obj\Debug\netcoreapp3.1\
 verifyTagsGUI
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-C:\Users\jshoemaker\source\repos\verifyTagsGUI\App.xaml
-11151548125
+c:\Users\jshoemaker\source\repos\verifyTagsGUI\App.xaml
+1219584333
 
-3-917710711
-198-1205355342
+5-381624354
+198-1479697336
 MainWindow.xaml;
 
-False
+True
 

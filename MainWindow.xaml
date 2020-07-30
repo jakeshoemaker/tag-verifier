@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:verifyTagsGUI"
         mc:Ignorable="d"
-        Title="Rehrig Tag Verification" Height="450" Width="900" ResizeMode="CanResize" SizeToContent="Height">
+        Title="Rehrig Tag Verification" Height="450" Width="900" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <Storyboard x:Key="PlaySuccessAnimation" Storyboard.TargetProperty="(Brush.Opacity)" Storyboard.TargetName="AnimatedSuccessBrush">
             <DoubleAnimation From="0" To="100" Duration="0:1:0" AutoReverse="False" />
@@ -17,52 +17,57 @@
 
 
     <!-- Title, Verification, and Settings/ Configuration -->
-    <Grid x:Name="___Background_" Background="#FFCDE1ED" Width="182" HorizontalAlignment="Left">
+    <Grid x:Name="Column1" Background="#FFCDE1ED" HorizontalAlignment="Center" Width="900">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="89*"/>
+            <ColumnDefinition Width="177"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="6,10,0,0" Text="Tag Verification" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="171" FontFamily="SansSerif" FontSize="23" Grid.Column="1"/>
-        <TextBox x:Name="hostText" HorizontalAlignment="Left" Margin="16,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="138" Background="White" 
-                 Text="10.3.2.79" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF707070" FontFamily="SansSerif" FontSize="11" Grid.Column="1"/>
+        <GridSplitter HorizontalAlignment="Center" Grid.Column="1" ResizeBehavior="PreviousAndNext" Width="1" Background="Gray" />
+        <TextBlock HorizontalAlignment="Left" Margin="6,10,0,0" Text="Tag Verification" TextWrapping="Wrap" VerticalAlignment="Top" Height="37" Width="171" FontFamily="SansSerif" FontSize="23"/>
+        <TextBox x:Name="hostText" HorizontalAlignment="Left" Margin="20,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Background="White" 
+                 Text="10.3.2.79" RenderTransformOrigin="0.5,0.5" BorderBrush="#FF707070" FontFamily="SansSerif" FontSize="11" Height="15"/>
 
-        <Button Content="Connect" Click="buttonConnect_Click" Margin="87,67,24,347" Background="Azure" Grid.Column="1"/>
-        <Button Content="In File" Click="buttonInFile_Click" HorizontalAlignment="Left" Margin="18,92,0,0" VerticalAlignment="Top" Width="63" Background="Azure" Height="22" Grid.Column="1"/>
-        <Button Content="Out File" Click="buttonOutFile_Click" HorizontalAlignment="Left" Margin="87,92,0,0" VerticalAlignment="Top" Width="67" Background="Azure" Height="22" Grid.Column="1"/>
-        <Button Content="Start" Click="buttonStart_Click" Background="Azure" Margin="6,395,97,15" Grid.Column="1"/>
+        <Button Content="Connect" Click="buttonConnect_Click" HorizontalAlignment="Left" Margin="20,66,0,347" Background="Azure" Width="134"/>
+        <Button Content="In File" Click="buttonInFile_Click" HorizontalAlignment="Left" Margin="20,92,0,0" VerticalAlignment="Top" Width="63" Background="Azure" Height="22"/>
+        <Button Content="Out File" Click="buttonOutFile_Click" HorizontalAlignment="Left" Margin="87,92,0,0" VerticalAlignment="Top" Width="67" Background="Azure" Height="22"/>
+        <Button Content="Start" Click="buttonStart_Click" Background="Azure" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,20" Width="66" Height="20"/>
         <!--<ProgressBar Height="10" Canvas.Top="424" Width="800" Background="#FFCDE1ED" Margin="0,424,0,0"/> -->
-        <Button Content="Stop" Click="buttonStop_Click" Background="Azure" Margin="92,395,10,15" Grid.Column="1"/>
-        <ListBox Margin="194,10,-706,347" 
-                 Name="listTags" Background="#FFFFFCFC" Grid.Column="1" FontSize="25"/>
+        <Button Content="Stop" Click="buttonStop_Click" Background="Azure" Margin="88,0,0,20" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="66" Height="20" />
+
+
+        <ListBox Margin="10,10,10,347" 
+                 Name="listTags" Background="#FFFFFCFC" Grid.Column="2" FontSize="25"/>
 
 
         <!-- ANIMATIONS -->
 
-        <Canvas Margin="200,115,-329,48"  Background="#FF3FAB58" Grid.Column="1" />
-        <Canvas Margin="222,134,-305,67" Grid.Column="1" >
+        <Canvas Margin="10,115,381,48" Background="#FF3FAB58"  Grid.Column="2" />
+        <Canvas Margin="33,134,404,67" Grid.Column="2" >
             <Canvas.Background>
                 <ImageBrush ImageSource="/checkmark.jpg"/>
             </Canvas.Background>
         </Canvas>
-        <Canvas x:Name="SuccessCanvas" Grid.Column="1" Margin="194,103,-347,36">
+        <Canvas x:Name="SuccessCanvas" Grid.Column="2" Margin="5,103,370,30" >
             <Canvas.Background>
-                <SolidColorBrush x:Name="AnimatedSuccessBrush" Color="White" />
+                <SolidColorBrush x:Name="AnimatedSuccessBrush" Color="#FFCDE1ED" />
             </Canvas.Background>
         </Canvas>
-        
+
         <!-- tag success animation -->
-        <Canvas Margin="535,115,-678,48" Grid.Column="1" Background="#FFDD4C4C"></Canvas>
-        <Canvas Grid.Column="1" Margin="547,134,-664,60" >
+        <Canvas Margin="373,115,10,48" Grid.Column="2" Background="#FFDD4C4C" />
+        <Canvas Margin="400,134,38,67" Grid.Column="2" >
             <Canvas.Background>
                 <ImageBrush ImageSource="/x-mark.png"/>
             </Canvas.Background>
         </Canvas>
-        <!-- tag failed animation -->
-        <Canvas x:Name="FailureCanvas" Grid.Column="1" Margin="525,103,-695,27">
+        <Canvas x:Name="FailureCanvas" Grid.Column="2" Margin="372,114,0,30">
             <Canvas.Background>
-                <SolidColorBrush x:Name="AnimatedFailureBrush" Color="White" />
+                <SolidColorBrush x:Name="AnimatedFailureBrush" Color="#FFCDE1ED" />
             </Canvas.Background>
-        </Canvas> 
+        </Canvas>
+        <!-- tag failed animation -->
+
 
     </Grid>
     <!-- Live view of tags getting verified-->
